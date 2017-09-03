@@ -1,0 +1,52 @@
+
+<div class="post">
+
+  <div class="wow fadeIn">
+
+  <label class="label label-success" style="font-size:17px"><%= articles.count %> Posts Found</label>
+
+  <% if articles.count != 0 %>
+    <% articles.each do |article| %>
+      <div class="row field-margin-sm">
+      <div class="col-sm-12">
+
+      <div class="container text-center well post-index-entry" style="width:80%">
+
+              <h2><%= article.title %></h2>
+
+              <img src="<%=article.img_url %>" alt="Post image" class="post-image-index img-responsive img-rounded">
+
+              <!-- Render the like and favorite partial -->
+              <%= render 'common/like_favorite', article: article %>
+
+              <p class ="field-margin-sm">
+                <%= article.description %>
+              </p>
+
+              <p class="field-margin-sm">
+                <span class="label label-success">Posted by:</span>
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+                <%= link_to article.user.email, profile_path(article.user_id)%>
+              </p>
+
+              <span class="label label-primary"><%= link_to 'Show', article, style:"color:white" %></span>
+              <% if current_user.id == article.user_id %>
+              <span class="label label-success"><%= link_to 'Edit', edit_article_path(article.id), style:"color:white" %></span>
+              <span class="label label-danger"><%= link_to 'Delete', article, method: :delete, data: { confirm: 'Are you sure?' }, style:"color:white" %></span>
+              <%end%>
+
+        </div>
+      </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="alert alert-warning" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Warning</span>
+      No posts found. Please try a different title.
+    </div>
+  <% end %>
+
+  </div>
+
+</div>

@@ -1,0 +1,14 @@
+
+<div class="container text-center">
+
+  <h1 class="text-center field-margin-md"><%="#{current_user.first_name} #{current_user.last_name}"%>'s Favorites</h1>
+
+  <h2 class="text-center field-margin-md">Search Favorites</h1>
+    <!-- In future: make filter_method 2 more elegant -->
+  <%= render 'common/search', {articles:@articles, filter_method:2} %>
+
+  <div id="articles">
+    <%= render 'common/list_user_posts', articles: @articles %>
+  </div>
+
+</div>

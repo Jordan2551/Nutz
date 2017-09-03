@@ -1,0 +1,24 @@
+
+<div class="container well text-center">
+
+<h2><%= @article.title %></h2>
+
+<img src="<%=@article.img_url %>" alt="Post image" class="post-image img-responsive img-rounded">
+
+
+<p class = "post-field">
+  <%= @article.description %>
+</p>
+
+<p class = "post-field">
+  <span class="label label-success">Posted by:</span>
+  <i class="fa fa-user-o" aria-hidden="true"></i>
+  <%= link_to @article.user.email, profile_path(@article.user_id)%>
+</p>
+
+<% if current_user.id == @article.user_id %>
+<span class="label label-success"><%= link_to 'Edit', edit_article_path(@article), style:"color:white" %></span>
+<span class="label label-danger"><%= link_to 'Delete', @article, method: :delete, data: { confirm: 'Are you sure?' }, style:"color:white" %></span>
+<%end%>
+
+</div>

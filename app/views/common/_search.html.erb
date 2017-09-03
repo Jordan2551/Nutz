@@ -1,0 +1,24 @@
+
+  <div class="container field-margin-md">
+
+    <div class="row text-center" >
+      <div class="col-sm-offset-2 col-sm-7">
+        <%= form_with url: filter_articles_path, id:"search_form", method: :post do |form| %>
+            <div class="row">
+              <div class="col-6">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <button id="search_btn" class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                  </span>
+                  <%= form.text_field :search_query, id: 'search_field', class:'form-control', placeholder:"Search posts..." %>
+                  <%= form.hidden_field :filter_method, value: filter_method %>
+                </div><!-- /input-group -->
+              </div><!-- /.col-lg-6 -->
+            </div>
+        <%end%>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="text-center field-margin-md">User Posts</h1>

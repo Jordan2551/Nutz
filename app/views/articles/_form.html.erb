@@ -1,0 +1,22 @@
+<%= form_with(model: article, local: true) do |form| %>
+
+<%= render 'common/error_messages', object: article %>
+
+<div class="form-group">
+  <%= form.label :title, class:"form-label" %>
+  <%= form.text_field :title, id: :title, class:"form-control" %>
+</div>
+
+<div class="form-group">
+  <%= form.label :description, class:"form-label" %>
+  <%= form.text_area :description, id: :article_description, class:"form-control", rows: 5 %>
+</div>
+
+<div class="form-group">
+  <%= form.label :img_url, class:"form-label" %>
+  <%= form.text_field :img_url, id: :article_img_url, class:"form-control" %>
+</div>
+
+<%= form.submit class:"btn btn-lg btn-success" %>
+
+<% end %>

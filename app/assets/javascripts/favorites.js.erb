@@ -1,0 +1,39 @@
+
+$(document).on('turbolinks:load', function(){
+  bindFavoriteButtons();
+});
+
+//Binds the event when we click the like button. We put this into a function so that we can rebind it after we replace all of the html
+//of the posts. This is because when we replace all of the html, we also get rid of the javascript bindings on events.
+//https://stackoverflow.com/questions/13767919/jquery-event-wont-fire-after-ajax-call
+function bindFavoriteButtons(){
+  $('.post .favorite_button').each(function(){
+    $(this).click(function(){
+      $this = $(this);
+      $.ajax({
+        url: '/favorite/' + $(this).parent().siblings('.article_id').val(),
+        type: 'POST',
+        dataType: 'json',
+      })
+      .done(function(json, textStatus) {
+        if(json.status === "favorited"){
+          // console.log( $this.html() );
+          $this.html("<i class='fa fa-heart' aria-hidden='true'>Unfavorite</i>");
+        }
+
+        else
+          $this.html("<i class='fa fa-heart-o' aria-hidden='true'>Favorite</i>");
+
+        $this.parent().siblings('.stat_labels').find('.favorite_label').html("<i class='fa fa-heart field-margin-xs' aria-hidden='true'></i>   Favorites: "+json.favorite_count+"");
+
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+
+    });
+  });
+}

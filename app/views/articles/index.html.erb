@@ -1,0 +1,19 @@
+<div class="container text-center">
+
+<% if user_signed_in? %>
+
+<h2 class="text-center field-margin-md">Search Posts</h1>
+  <!-- In future: make filter_method 0 more elegant -->
+<%= render 'common/search', {articles:@articles, filter_method:0} %>
+
+<div id="articles">
+  <%= render 'common/list_user_posts', articles: @articles %>
+</div>
+
+</div>
+
+<%else%>
+
+<%= render 'common/welcome_page' %>
+
+<%end%>

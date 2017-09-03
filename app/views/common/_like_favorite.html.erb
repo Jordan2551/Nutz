@@ -1,0 +1,22 @@
+
+<div class="form-inline field-margin-sm">
+  <a class="label label-success like_button" style="font-size:14px">
+     <%if current_user.likes.where(article_id: article).empty? %>
+     <i class="fa fa-thumbs-o-up" aria-hidden="true">Like</i>
+     <%else%>
+     <i class="fa fa-thumbs-up" aria-hidden="true">Unlike</i>
+     <%end%>
+  </a>
+  <a class="label label-warning favorite_button" style="font-size:14px">
+    <%if current_user.favorites.where(article_id: article).empty? %>
+    <i class="fa fa-heart-o" aria-hidden="true">Favorite</i>
+    <%else%>
+    <i class="fa fa-heart" aria-hidden="true">Unfavorite</i>
+    <%end%>
+  </a>
+</div>
+<div class="stat_labels form-inline field-margin-sm">
+  <p class="like_label"><i class="fa fa-thumbs-up field-margin-xs" aria-hidden="true"></i>   Likes: <%= article.likes.count%></p>
+  <p class="favorite_label"><i class="fa fa-heart" aria-hidden="true"></i>   Favorites: <%= article.favorites.count%></p>
+</div>
+<%= hidden_field_tag(:article_id, value = article.id, class: "article_id") %>

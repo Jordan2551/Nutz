@@ -1,0 +1,6 @@
+
+$('#articles').html("<%= j render 'common/list_user_posts', articles: @articles %>");
+
+//See favorites.js.erb/likes.js.erb for explanation
+bindLikeButtons();
+bindFavoriteButtons();

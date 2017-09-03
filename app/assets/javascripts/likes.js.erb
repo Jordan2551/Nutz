@@ -1,0 +1,33 @@
+
+$(document).on('turbolinks:load', function(){
+  bindLikeButtons();
+});
+
+//Binds the event when we click the like button. We put this into a function so that we can rebind it after we replace all of the html
+//of the posts. This is because when we replace all of the html, we also get rid of the javascript bindings on events.
+//https://stackoverflow.com/questions/13767919/jquery-event-wont-fire-after-ajax-call
+function bindLikeButtons(){
+  $('.post .like_button').each(function(){
+    $(this).click(function(){
+      $this = $(this);
+      $.ajax({
+        url: '/like/' + $(this).parent().siblings('.article_id').val(),
+        type: 'POST',
+        dataType: 'json',
+      })
+      .done(function(json, textStatus) {
+        if(json.status === "liked"){
+          // console.log( $this.html() );
+          $this.html("<i class='fa fa-thumbs-up' aria-hidden='true'>Unlike</i>");
+        }
+
+        else
+          $this.html("<i class='fa fa-thumbs-o-up' aria-hidden='true'>Like</i>");
+
+        $this.parent().siblings('.stat_labels').find('.like_label').html("<i class='fa fa-thumbs-up field-margin-xs' aria-hidden='true'></i>   Likes: "+json.like_count+"");
+
+      })
+    });
+
+  });
+}
