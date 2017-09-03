@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20170829183949) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "articles", force: :cascade do |t|
     t.string "description"
     t.string "img_url"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20170829183949) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "article_id"
+    t.bigint "user_id"
+    t.bigint "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_favorites_on_article_id"
@@ -32,8 +35,8 @@ ActiveRecord::Schema.define(version: 20170829183949) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "article_id"
+    t.bigint "user_id"
+    t.bigint "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_likes_on_article_id"
@@ -60,4 +63,9 @@ ActiveRecord::Schema.define(version: 20170829183949) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "articles", "users"
+  add_foreign_key "favorites", "articles"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "likes", "articles"
+  add_foreign_key "likes", "users"
 end
