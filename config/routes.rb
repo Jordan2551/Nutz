@@ -17,6 +17,6 @@ Rails.application.routes.draw do
   resources :profiles, only: [:show]
 
   root 'articles#index'
-  post 'filter_articles', to: 'articles#filter_articles'
+  get 'filter_articles', to: 'articles#filter_articles'
 
 end
