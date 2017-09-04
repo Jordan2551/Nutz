@@ -1,5 +1,5 @@
 
-<div class="container well text-center">
+<div class="container well text-center field-margin-lg">
 
 <h2><%= @article.title %></h2>
 
@@ -20,5 +20,13 @@
 <span class="label label-success"><%= link_to 'Edit', edit_article_path(@article), style:"color:white" %></span>
 <span class="label label-danger"><%= link_to 'Delete', @article, method: :delete, data: { confirm: 'Are you sure?' }, style:"color:white" %></span>
 <%end%>
+
+</div>
+
+<div class="container well text-center">
+
+  <%= render 'comments/form', {comment: Comment.new, article_id: @article.id} %>
+  <span class="field-margin-lg"></span>
+  <%= render 'comments/list_all_comments', comments: @article.comments %>
 
 </div>

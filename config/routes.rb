@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   get 'favorites/:id', to: 'favorites#show'
 
   devise_for :users
-  resources :articles
+
+  resources :articles do
+    resources :comments
+  end
 
   resources :profiles, only: [:show]
 

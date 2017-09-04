@@ -1,6 +1,6 @@
-<%= form_with(model: article, local: true) do |form| %>
+<%= form_with(model: @article, local: true) do |form| %>
 
-<%= render 'common/error_messages', object: article %>
+<%= render 'common/error_messages', object: @article %>
 
 <div class="form-group">
   <%= form.label :title, class:"form-label" %>
